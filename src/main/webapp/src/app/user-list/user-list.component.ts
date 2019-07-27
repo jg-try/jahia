@@ -13,6 +13,16 @@ export class UserListComponent implements OnInit {
 
   cols: any[];
 
+  displayDialog: boolean;
+
+  user: User = new User();
+
+  selectedUser: User;
+
+  newUser: boolean;
+
+
+
   constructor(private userService: UserService) {
 
   }
@@ -23,23 +33,47 @@ export class UserListComponent implements OnInit {
     });
 
     this.cols = [
-      { field: 'id', header: 'id' },
       { field: 'name', header: 'name' },
       { field: 'email', header: 'email' }
     ];
   }
 
-  deleteUser(user) {
-    const i = this.users.indexOf(user);
-    this.users.splice(i, 1);
-    this.userService.delete(user).subscribe(data => {
-      this.users = data;
-    });
+  showDialogToAdd() {
+    this.newUser = true;
+    this.user = new User();
+    this.displayDialog = true;
   }
 
-  updateUser(user){
-    this.userService.update(user).subscribe(data => {
-      this.users = data;
-    });
+  save() {
+    let users = [...this.users];
+    if (this.newUser) {
+      users.push(this.user);
+    } else {
+      users[this.users.indexOf(this.selectedUser)] = this.user;
+    }
+    this.users = users;
+    this.user = null;
+    this.displayDialog = false;
+  }
+
+  delete() {
+    let index = this.users.indexOf(this.selectedUser);
+    this.users = this.users.filter((val, i) => i != index);
+    this.user = null;
+    this.displayDialog = false;
+  }
+
+  onRowSelect(event) {
+    this.newUser = false;
+    this.user = this.cloneUser(event.data);
+    this.displayDialog = true;
+  }
+
+  cloneUser(u: User): User {
+    let user = new User();
+    for (let prop in u) {
+      user[prop] = u[prop];
+    }
+    return user;
   }
 }
