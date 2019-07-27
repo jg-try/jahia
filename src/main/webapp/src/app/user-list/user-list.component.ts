@@ -11,6 +11,8 @@ export class UserListComponent implements OnInit {
 
   users: User[];
 
+  cols: any[];
+
   constructor(private userService: UserService) {
 
   }
@@ -19,5 +21,11 @@ export class UserListComponent implements OnInit {
     this.userService.findAll().subscribe(data => {
       this.users = data;
     });
+
+    this.cols = [
+      { field: 'id', header: 'id' },
+      { field: 'name', header: 'name' },
+      { field: 'email', header: 'email' }
+  ];
   }
 }

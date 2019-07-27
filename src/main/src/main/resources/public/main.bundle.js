@@ -44,7 +44,7 @@ var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {
     }
     AppRoutingModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
             imports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* RouterModule */].forRoot(routes)],
             exports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* RouterModule */]]
         })
@@ -88,10 +88,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var AppComponent = /** @class */ (function () {
     function AppComponent() {
-        this.title = 'Spring Boot - Angular Application';
+        this.title = 'Jahia demo app';
     }
     AppComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-root',
             template: __webpack_require__("./src/app/app.component.html"),
             styles: [__webpack_require__("./src/app/app.component.css")]
@@ -119,6 +119,10 @@ var AppComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__user_list_user_list_component__ = __webpack_require__("./src/app/user-list/user-list.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__user_form_user_form_component__ = __webpack_require__("./src/app/user-form/user-form.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__service_user_service__ = __webpack_require__("./src/app/service/user.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_primeng_table__ = __webpack_require__("./node_modules/primeng/table.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_primeng_table___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_primeng_table__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_primeng_dialog__ = __webpack_require__("./node_modules/primeng/dialog.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_primeng_dialog___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10_primeng_dialog__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -134,11 +138,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
+
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
     AppModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["I" /* NgModule */])({
+        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["NgModule"])({
             declarations: [
                 __WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* AppComponent */],
                 __WEBPACK_IMPORTED_MODULE_6__user_list_user_list_component__["a" /* UserListComponent */],
@@ -148,7 +154,9 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
                 __WEBPACK_IMPORTED_MODULE_2__app_routing_module__["a" /* AppRoutingModule */],
                 __WEBPACK_IMPORTED_MODULE_4__angular_common_http__["b" /* HttpClientModule */],
-                __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormsModule */]
+                __WEBPACK_IMPORTED_MODULE_3__angular_forms__["FormsModule"],
+                __WEBPACK_IMPORTED_MODULE_9_primeng_table__["TableModule"],
+                __WEBPACK_IMPORTED_MODULE_10_primeng_dialog__["DialogModule"]
             ],
             providers: [__WEBPACK_IMPORTED_MODULE_8__service_user_service__["a" /* UserService */]],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* AppComponent */]]
@@ -206,7 +214,7 @@ var UserService = /** @class */ (function () {
         return this.http.post(this.usersUrl, user);
     };
     UserService = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */]])
     ], UserService);
     return UserService;
@@ -267,7 +275,7 @@ var UserFormComponent = /** @class */ (function () {
         this.router.navigate(['/users']);
     };
     UserFormComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-user-form',
             template: __webpack_require__("./src/app/user-form/user-form.component.html"),
             styles: [__webpack_require__("./src/app/user-form/user-form.component.css")]
@@ -291,7 +299,7 @@ module.exports = ""
 /***/ "./src/app/user-list/user-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"card my-5\">\n  <div class=\"card-body\">\n    <table class=\"table table-bordered table-striped\">\n      <thead class=\"thead-dark\">\n        <tr>\n          <th scope=\"col\">#</th>\n          <th scope=\"col\">Name</th>\n          <th scope=\"col\">Email</th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr *ngFor=\"let user of users\">\n          <td>{{ user.id }}</td>\n          <td>{{ user.name }}</td>\n          <td><a href=\"mailto:{{ user.email }}\">{{ user.email }}</a></td>\n        </tr>\n      </tbody>\n    </table>\n  </div>\n</div>"
+module.exports = "<div class=\"card my-5\">\n  <div class=\"card-body\">\n    <table class=\"table table-bordered table-striped\">\n      <thead class=\"thead-dark\">\n        <tr>\n          <th scope=\"col\">#</th>\n          <th scope=\"col\">Name</th>\n          <th scope=\"col\">Email</th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr *ngFor=\"let user of users\">\n          <td>{{ user.id }}</td>\n          <td>{{ user.name }}</td>\n          <td><a href=\"mailto:{{ user.email }}\">{{ user.email }}</a></td>\n        </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n\n<p-table #dt [columns]=\"cols\" [value]=\"users\" [paginator]=\"true\" [rows]=\"10\">\n  <ng-template pTemplate=\"caption\">\n      <div style=\"text-align: right\">        \n          <i class=\"fa fa-search\" style=\"margin:4px 4px 0 0\"></i>\n          <input type=\"text\" pInputText size=\"50\" placeholder=\"Global Filter\" (input)=\"dt.filterGlobal($event.target.value, 'contains')\" style=\"width:auto\">\n      </div>\n  </ng-template>\n  <ng-template pTemplate=\"header\" let-columns>\n      <tr>\n          <th *ngFor=\"let col of columns\">\n              {{col.header}}\n          </th>\n      </tr>\n      <tr>\n          <th *ngFor=\"let col of columns\" [ngSwitch]=\"col.field\">\n              <input *ngSwitchCase=\"'id'\" pInputText type=\"text\" (input)=\"dt.filter($event.target.value, col.field, col.filterMatchMode)\">\n              <input *ngSwitchCase=\"'name'\" pInputText type=\"text\" (input)=\"dt.filter($event.target.value, col.field, col.filterMatchMode)\">\n              <input *ngSwitchCase=\"'email'\" pInputText type=\"text\" (input)=\"dt.filter($event.target.value, col.field, col.filterMatchMode)\">\n          </th>\n      </tr>\n  </ng-template>\n  <ng-template pTemplate=\"body\" let-rowData let-columns=\"columns\">\n      <tr [pSelectableRow]=\"rowData\">\n          <td *ngFor=\"let col of columns\">\n              {{rowData[col.field]}}\n          </td>\n      </tr>\n  </ng-template>\n</p-table>"
 
 /***/ }),
 
@@ -322,9 +330,14 @@ var UserListComponent = /** @class */ (function () {
         this.userService.findAll().subscribe(function (data) {
             _this.users = data;
         });
+        this.cols = [
+            { field: 'id', header: 'id' },
+            { field: 'name', header: 'name' },
+            { field: 'email', header: 'email' }
+        ];
     };
     UserListComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-user-list',
             template: __webpack_require__("./src/app/user-list/user-list.component.html"),
             styles: [__webpack_require__("./src/app/user-list/user-list.component.css")]
@@ -368,7 +381,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 if (__WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].production) {
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_13" /* enableProdMode */])();
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["enableProdMode"])();
 }
 Object(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_2__app_app_module__["a" /* AppModule */])
     .catch(function (err) { return console.log(err); });
