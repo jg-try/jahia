@@ -213,6 +213,12 @@ var UserService = /** @class */ (function () {
     UserService.prototype.save = function (user) {
         return this.http.post(this.usersUrl, user);
     };
+    UserService.prototype.delete = function (user) {
+        return this.http.post(this.usersUrl + '/delete', user);
+    };
+    UserService.prototype.update = function (user) {
+        return this.http.post(this.usersUrl + '/update', user);
+    };
     UserService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */]])
@@ -299,7 +305,7 @@ module.exports = ""
 /***/ "./src/app/user-list/user-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"card my-5\">\n  <div class=\"card-body\">\n    <table class=\"table table-bordered table-striped\">\n      <thead class=\"thead-dark\">\n        <tr>\n          <th scope=\"col\">#</th>\n          <th scope=\"col\">Name</th>\n          <th scope=\"col\">Email</th>\n        </tr>\n      </thead>\n      <tbody>\n        <tr *ngFor=\"let user of users\">\n          <td>{{ user.id }}</td>\n          <td>{{ user.name }}</td>\n          <td><a href=\"mailto:{{ user.email }}\">{{ user.email }}</a></td>\n        </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n\n<p-table #dt [columns]=\"cols\" [value]=\"users\" [paginator]=\"true\" [rows]=\"10\">\n  <ng-template pTemplate=\"caption\">\n      <div style=\"text-align: right\">        \n          <i class=\"fa fa-search\" style=\"margin:4px 4px 0 0\"></i>\n          <input type=\"text\" pInputText size=\"50\" placeholder=\"Global Filter\" (input)=\"dt.filterGlobal($event.target.value, 'contains')\" style=\"width:auto\">\n      </div>\n  </ng-template>\n  <ng-template pTemplate=\"header\" let-columns>\n      <tr>\n          <th *ngFor=\"let col of columns\">\n              {{col.header}}\n          </th>\n      </tr>\n      <tr>\n          <th *ngFor=\"let col of columns\" [ngSwitch]=\"col.field\">\n              <input *ngSwitchCase=\"'id'\" pInputText type=\"text\" (input)=\"dt.filter($event.target.value, col.field, col.filterMatchMode)\">\n              <input *ngSwitchCase=\"'name'\" pInputText type=\"text\" (input)=\"dt.filter($event.target.value, col.field, col.filterMatchMode)\">\n              <input *ngSwitchCase=\"'email'\" pInputText type=\"text\" (input)=\"dt.filter($event.target.value, col.field, col.filterMatchMode)\">\n          </th>\n      </tr>\n  </ng-template>\n  <ng-template pTemplate=\"body\" let-rowData let-columns=\"columns\">\n      <tr [pSelectableRow]=\"rowData\">\n          <td *ngFor=\"let col of columns\">\n              {{rowData[col.field]}}\n          </td>\n      </tr>\n  </ng-template>\n</p-table>"
+module.exports = "<div class=\"card my-5\">\n  <div>\n    <p-table #dt [columns]=\"cols\" [value]=\"users\" [paginator]=\"false\" [rows]=\"10\" class=\"table table-bordered table-striped\">\n      <ng-template pTemplate=\"caption\">\n        <div style=\"text-align: left\">\n          <i class=\"fa fa-search\" style=\"margin:4px 4px 0 0\"></i>\n          <input type=\"text\" pInputText size=\"50\" placeholder=\"Global Filter\" (input)=\"dt.filterGlobal($event.target.value, 'contains')\"\n            style=\"width:auto\">\n        </div>\n      <br/>\n      </ng-template>\n      <ng-template pTemplate=\"header\" let-columns>\n        <tr class=\"thead-dark\">\n          <th *ngFor=\"let col of columns\">\n            {{col.header}}\n          </th>\n          <th></th>\n        </tr>\n        <tr>\n          <th *ngFor=\"let col of columns\" [ngSwitch]=\"col.field\">\n            <input placeholder=\"Id Filter\" *ngSwitchCase=\"'id'\" pInputText type=\"text\" (input)=\"dt.filter($event.target.value, col.field, col.filterMatchMode)\">\n            <input placeholder=\"Name Filter\" *ngSwitchCase=\"'name'\" pInputText type=\"text\" (input)=\"dt.filter($event.target.value, col.field, col.filterMatchMode)\">\n            <input placeholder=\"Email Filter\" *ngSwitchCase=\"'email'\" pInputText type=\"text\" (input)=\"dt.filter($event.target.value, col.field, col.filterMatchMode)\">\n          </th>\n          <th></th>\n        </tr>\n      </ng-template>\n      <ng-template pTemplate=\"body\" let-rowData let-columns=\"columns\">\n        <tr [pSelectableRow]=\"rowData\">\n          <td *ngFor=\"let col of columns\">\n            {{rowData[col.field]}}\n          </td>\n          <td (click)=\"deleteUser(rowData)\" class=\"pointer\">X</td>\n        </tr>\n      </ng-template>\n    </p-table>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -335,6 +341,20 @@ var UserListComponent = /** @class */ (function () {
             { field: 'name', header: 'name' },
             { field: 'email', header: 'email' }
         ];
+    };
+    UserListComponent.prototype.deleteUser = function (user) {
+        var _this = this;
+        var i = this.users.indexOf(user);
+        this.users.splice(i, 1);
+        this.userService.delete(user).subscribe(function (data) {
+            _this.users = data;
+        });
+    };
+    UserListComponent.prototype.updateUser = function (user) {
+        var _this = this;
+        this.userService.update(user).subscribe(function (data) {
+            _this.users = data;
+        });
     };
     UserListComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({

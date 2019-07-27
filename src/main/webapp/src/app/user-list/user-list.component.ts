@@ -26,6 +26,20 @@ export class UserListComponent implements OnInit {
       { field: 'id', header: 'id' },
       { field: 'name', header: 'name' },
       { field: 'email', header: 'email' }
-  ];
+    ];
+  }
+
+  deleteUser(user) {
+    const i = this.users.indexOf(user);
+    this.users.splice(i, 1);
+    this.userService.delete(user).subscribe(data => {
+      this.users = data;
+    });
+  }
+
+  updateUser(user){
+    this.userService.update(user).subscribe(data => {
+      this.users = data;
+    });
   }
 }
