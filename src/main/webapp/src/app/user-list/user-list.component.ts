@@ -79,4 +79,8 @@ export class UserListComponent implements OnInit {
     }
     return user;
   }
+
+  refresh(){
+    this.userService.findAll().subscribe(data => this.users = data);
+  }
 }
