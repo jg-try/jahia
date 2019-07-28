@@ -47,8 +47,10 @@ export class UserListComponent implements OnInit {
   save() {
     let users = [...this.users];
     if (this.newUser) {
+      this.userService.save(this.user).subscribe();
       users.push(this.user);
     } else {
+      this.userService.update(this.user).subscribe();
       users[this.users.indexOf(this.selectedUser)] = this.user;
     }
     this.users = users;
@@ -57,6 +59,7 @@ export class UserListComponent implements OnInit {
   }
 
   delete() {
+    this.userService.delete(this.user).subscribe();
     let index = this.users.indexOf(this.selectedUser);
     this.users = this.users.filter((val, i) => i != index);
     this.user = null;
